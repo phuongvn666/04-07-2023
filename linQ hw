@@ -1,0 +1,563 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+
+namespace BaiTapLinQ
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Program program = new Program();
+            //program.Bai1();
+            //program.Bai2();
+            //program.Bai3();
+            //program.Bai4();
+            //program.Bai5();
+            //program.Bai6();
+            //program.Bai7();
+            //program.Bai8();
+            //program.Bai9();
+            //program.Bai10();
+            //program.Bai11();
+            //program.Bai12();
+            //program.Bai13();
+            //program.Bai14();
+            //program.Bai15();
+            //program.Bai16();
+            //program.Bai17();
+            //program.Bai18();
+            //program.Bai19();
+            //program.Bai20();
+            //program.Bai21();
+            //program.Bai22();
+            //program.Bai23();
+            //program.Bai24();
+            program.Bai25();
+            //program.Bai26();
+            //program.Bai27();
+            //program.Bai28();
+            //program.Bai29();
+           // program.Bai30();
+
+        }
+        public void Bai1()
+        {
+            int[] list = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+            var answer = from number in list
+                         where number % 2 == 0
+                         select number;
+            Console.WriteLine("Các số tạo ra phần dư 0 sau khi chia cho 2 là:");
+            Console.WriteLine(string.Join(" ", answer));
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai2()
+        {
+            int[] list = { -7, -4, -2, 1, 3, 6, 9, 10, 14, 24 };
+            var answer = from number in list
+                         where number >= 0 && number <= 11
+                         select number;
+            Console.WriteLine("Các số trong phạm vi từ 1 đến 11 là:");
+            Console.WriteLine(string.Join(" ", answer));
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai3()
+        {
+            int[] list = { 9, 8, 6, 5 };
+            var answer = from number in list
+                         select new { Number = number, SqrNo = number * number };
+            foreach (var item in answer)
+            {
+                Console.WriteLine($"{{ Number = {item.Number}, SqrNo = {item.SqrNo} }}");
+            }
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai4()
+        {
+            int[] list = { 5, 9, 1, 5, 9, 5 };
+            var answer = from number in list
+                         group number by number into gr
+                         let count = gr.Count()
+                         select new
+                         {
+                             Number = gr.Key,
+                             Count = count
+                         };
+            Console.WriteLine("Số và Tần suất là:");
+            foreach (var item in answer)
+                Console.WriteLine($"Số {item.Number} xuất hiện {item.Count}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+
+        }
+        public void Bai5()
+        {
+            string sr = "apple";
+            char[] chars = sr.ToCharArray();
+            var answer = from chr in chars
+                         group chr by chr into gr
+                         let count = gr.Count()
+                         select new { Char = gr.Key, Count = count };
+            Console.WriteLine("Tần suất của các ký tự là:");
+            foreach (var item in answer)
+                Console.WriteLine($"Ký tự {item.Char}: {item.Count} lần");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+
+        }
+        public void Bai6()
+        {
+            string[] dayofweek = { "Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư",
+                "Thứ năm", "Thứ sáu", "Thứ bảy" };
+            var answer = from day in dayofweek
+                         select day;
+            foreach (var day in answer) Console.WriteLine(day);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai7()
+        {
+            int[] list = { 5, 1, 9, 2, 3, 7, 4, 5, 6, 8, 7, 6, 3, 4, 5, 2 };
+            var answer = from number in list
+                         group number by number into gr
+                         let count = gr.Count()
+                         select new
+                         {
+                             Number = gr.Key,
+                             NumberxCount = gr.Key * count,
+                             Count = count
+                         };
+            Console.WriteLine("Số   Số * Tần số    Tần số ");
+            foreach (var item in answer)
+                Console.WriteLine($"{item.Number,2}{item.NumberxCount,14}{item.Count,9}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai8()
+        {
+            string[] list = { "ROME", "LONDON", "NAIROBI", "CALIFORNIA",
+                "ZURICH", "NEW DELHI", "AMSTERDAM", "ABU DHABI", "PARIS" };
+            var answer = from city in list
+                         where city.StartsWith("A") && city.EndsWith("M")
+                         select city;
+            foreach (var item in answer)
+                Console.WriteLine($"Thành phố bắt đầu bằng A và kết thúc bằng M là {item}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai9()
+        {
+            int[] list = { 55, 200, 740, 76, 230, 482, 95 };
+            var answer = from number in list
+                         where number >= 80
+                         select number;
+            Console.WriteLine("Các số lớn hơn 80 là:");
+            foreach (var item in answer) Console.WriteLine(item);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai10()
+        {
+            Console.WriteLine("Nhập số lượng thành viên trong Danh sách ");
+            int count = int.Parse(Console.ReadLine());
+            int[] list = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                Console.Write($"Thành viên {i}: ");
+                list[i] = int.Parse(Console.ReadLine());
+            }
+            Console.Write("Nhập giá trị trên mà bạn muốn hiển thị các thành viên trong Danh sách:");
+            int number = int.Parse(Console.ReadLine());
+            var answer = from item in list
+                         where item > number
+                         select item;
+            Console.WriteLine("Các số lớn hơn 59 là :");
+            foreach (var item in answer) Console.WriteLine(item);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai11()
+        {
+            int[] list = { 5, 7, 13, 24, 6, 9, 8, 7 };
+            Console.Write("Bạn muốn hiển thị bao nhiêu bản ghi? :");
+            int record = int.Parse(Console.ReadLine());
+            var answer = from number in list
+                         orderby number descending
+                         select number;
+            var records = answer.Take(record);
+            Console.WriteLine($"{record} bản ghi hàng đầu trong danh sách là :");
+            foreach (var item in records) Console.WriteLine(item);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai12()
+        {
+            string str = "day LA CHUOI";
+            var answer = str.Split(' ').Where(word => word.Any(Char.IsUpper));
+            foreach (var item in answer) Console.WriteLine(item);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai13()
+        {
+            Console.Write("Nhập số lượng chuỗi để lưu trữ trong mảng :");
+            int count = int.Parse(Console.ReadLine());
+            string[] element = new string[count];
+            for (int i = 0; i < count; i++)
+            {
+                Console.Write($"Element[{i}] : ");
+                element[i] = Console.ReadLine();
+            }
+            string answer = string.Join(", ", element);
+            Console.WriteLine(answer);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public class Student
+        {
+            public int id { get; set; }
+            public string name { get; set; }
+            public int gradePoint { get; set; }
+            public Student(int Id = 0, string Name = "", int GradePoint = 700)
+            {
+                this.id = Id;
+                this.name = Name;
+                this.gradePoint = GradePoint;
+            }
+
+        }
+
+        public void Bai14()
+        {
+            Student[] students = new Student[6];
+            students[0] = new Student(1, "Garry", 700);
+            students[1] = new Student(2, "Parry", 600);
+            students[2] = new Student(3, "Larry", 900);
+            students[3] = new Student(4, "Harry", 800);
+            students[4] = new Student(7, "David", 750);
+            students[5] = new Student(10, "Jenny", 750);
+            Console.WriteLine("Bạn muốn tìm điểm tối đa nào (1, 2, 3, ...) : ");
+            int count = int.Parse(Console.ReadLine());
+            var answer = students.OrderByDescending(y => y.gradePoint).ToList();
+
+
+            var answer2 = answer.GroupBy(r => r.gradePoint)
+                .Select(r => new
+                {
+                    Key = r.Key,
+                    Value = r.ToList()
+                })
+                .ToList();
+
+            int gradePoint = answer[count].gradePoint;
+            foreach (var group in answer2)
+            {
+                if (group.Key == gradePoint)
+                    foreach (var student in group.Value)
+                    {
+                        Console.WriteLine($"Id :{student.id,3} ,Name {student.name}" +
+                            $" ,GradePoint   {student.gradePoint}");
+                    }
+            }
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai15()
+        {
+            string[] list = {"aaa.frx", "bbb.TXT", "xyz.dbf","abc.pdf",
+                "aaaa.PDF","xyz.frt", "abc.xml", "ccc.txt", "zzz.txt"};
+            var answer = from file in list
+                         group file by file.Substring(file.LastIndexOf('.')).ToLower() into gr
+                         select new
+                         {
+                             name = gr.Key,
+                             count = gr.Count()
+                         };
+            foreach (var item in answer) Console.WriteLine($"{item.count} tệp có phần mở rộng {item.name}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        static double GetFileSize(string filePath)
+        {
+            FileInfo fileInfo = new FileInfo(filePath);
+            return fileInfo.Length / (1024.0 * 1024.0);
+        }
+        public void Bai16()
+        {
+            List<string> list = new List<string>()
+        {
+            "file1.txt",
+            "file2.txt",
+            "file3.txt",
+            "file4.txt",
+            "file5.txt"
+        };
+            var answer = list.Select(GetFileSize);
+            double average = answer.Average();
+            Console.WriteLine("Kích thước tệp trung bình là " + average + " MB");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai17()
+        {
+            List<char> chars = new List<char>() { 'm', 'n', 'o', 'p', 'q' };
+            Console.Write("Mục cần xóa: ");
+            char c = char.Parse(Console.ReadLine());
+            chars.Remove(c);
+            Console.WriteLine($"Đây là danh sách sau xóa mục '{c}' khỏi danh sách");
+            foreach (var x in chars) Console.WriteLine("Char: " + x);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai19()
+        {
+            char[] chars = new char[5];
+            for (int i = 0; i < chars.Length; i++)
+            {
+                Console.Write("Char: ");
+                chars[i] = char.Parse(Console.ReadLine());
+            }
+            Console.Write("Mục cần xóa: ");
+            char c = char.Parse(Console.ReadLine());
+            var answer = chars.Where(x => x != c).ToList();
+            Console.WriteLine($"Đây là danh sách sau xóa mục '{c}' khỏi danh sách");
+            foreach (char x in answer) Console.WriteLine("Char: " + x);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+
+        }
+        public void Bai18()
+        {
+            char[] chars = { 'm', 'n', 'o', 'p', 'q' };
+            Console.Write("Mục cần xóa: ");
+            char c = char.Parse(Console.ReadLine());
+            var answer = chars.Where(x => x != c).ToList();
+            Console.WriteLine($"Đây là danh sách sau xóa mục '{c}' khỏi danh sách");
+            foreach (var x in answer) Console.WriteLine("Char: " + x);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai20()
+        {
+            List<char> chars = new List<char>() { 'm', 'n', 'o', 'p', 'q' };
+            Console.Write("Chỉ mục cần xóa: ");
+            int c = int.Parse(Console.ReadLine());
+            var answer = chars.Where((item, index) => index != c).ToList();
+            Console.WriteLine($"Đây là danh sách sau xóa mục '{c}' khỏi danh sách");
+            foreach (char x in answer) Console.WriteLine("Char: " + x);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai21()
+        {
+            List<char> chars = new List<char>() { 'm', 'n', 'o', 'p', 'q' };
+            Console.Write("Số chỉ mục cần xóa: ");
+            int c = int.Parse(Console.ReadLine());
+            var answer = chars.Where((item, index) => index >= c).ToList();
+            Console.WriteLine($"Đây là danh sách sau xóa mục '{c}' khỏi danh sách");
+            foreach (char x in answer) Console.WriteLine("Char: " + x);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai22()
+        {
+            Console.Write("Nhập số lượng chuỗi để lưu trữ trong mảng:");
+            int x = int.Parse(Console.ReadLine());
+            string[] str = new string[x];
+            for (int i = 0; i < x; i++)
+            {
+                Console.Write($"Element{i} = ");
+                str[i] = Console.ReadLine();
+            }
+            Console.Write("Nhập độ dài tối thiểu của mục bạn muốn tìm: ");
+            int length = int.Parse(Console.ReadLine());
+            var answer = str.Where(a => a.Length >= length).ToList();
+            foreach (string word in answer) Console.WriteLine("Mục: " + word);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - -  - - - - - ");
+        }
+        public void Bai23()
+        {
+            char[] chars = new char[] { 'X' };
+            int[] numbers = new int[] { 1, 2, 3, 4 };
+            var
+                answer = from c in chars
+                         from x in numbers
+                         select new { letterList = c, numberList = x };
+            foreach (var item in answer) Console.WriteLine(item);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public void Bai24()
+        {
+            char[] chars = new char[] { 'X', 'Y' };
+            int[] numbers = new int[] { 1, 2, 3 };
+            string[] colors = new string[] { "Xanh", "Cam" };
+            var
+                answer = from c in chars
+                         from x in numbers
+                         from y in colors
+                         select new { letter = c, number = x, color = y };
+            foreach (var item in answer) Console.WriteLine(item);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public class Product
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public Product(int id = 0, string name = "")
+            {
+                Id = id;
+                Name = name;
+            }
+        }
+        public class Purchase
+        {
+            public int Id { get; set; }
+            public int Quantity { get; set; }
+            public Purchase(int id = 0, int quantity = 0)
+            {
+                Id = id;
+                Quantity = quantity;
+            }
+        }
+        public void Bai25()
+        {
+            List<Product> products = new List<Product>()
+            {
+                new Product{Id = 1,Name = "Bánh Quy" },
+                new Product{Id = 2,Name = "Sô cô la" },
+                new Product{Id = 3,Name = "Bơ" },
+                new Product{Id = 4,Name = "Râu" }
+            };
+            List<Purchase> purchases = new List<Purchase>()
+            {
+                new Purchase{Id = 1,Quantity = 458},
+                new Purchase{Id = 2,Quantity = 650},
+                new Purchase{Id = 3,Quantity = 800},
+                new Purchase{Id = 3,Quantity = 900},
+                new Purchase{Id = 3,Quantity = 900},
+                new Purchase{Id = 4,Quantity = 700},
+                new Purchase{Id = 4,Quantity = 650},
+            };
+            var answer = from product in products
+                         join purchase in purchases on product.Id equals purchase.Id
+                         select new
+                         {
+                             id = product.Id,
+                             name = product.Name,
+                             quantity = purchase.Quantity,
+                         };
+            //var answer2 = from x in answer
+            //              group x by x.name into y
+            //              select new
+            //              {
+            //                  id = y.First().id,
+            //                  name = y.Key,
+            //                  quantity = y.Select(x => x.quantity).Sum(),
+            //              };
+            var answer2 = answer.GroupBy(x => x.name).Select(y => new
+            {
+                name = y.Key,
+                id = y.First().id,
+                quantity = y.Sum(z => z.quantity)
+            });
+            Console.WriteLine("ID mặt hàng || Tên mặt hàng || Số lượng mua");
+            foreach (var item in answer2) Console.WriteLine($"{item.id,6} {item.name,17} {item.quantity,13}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public void Bai26()
+        {
+            List<Product> products = new List<Product>()
+            {
+                new Product{Id = 1,Name = "Bánh Quy" },
+                new Product{Id = 2,Name = "Sô cô la" },
+                new Product{Id = 3,Name = "Bơ" },
+                new Product{Id = 4,Name = "Râu" },
+                new Product{Id = 5,Name = "Số 5"}
+            };
+            List<Purchase> purchases = new List<Purchase>()
+            {
+                new Purchase{Id = 1,Quantity = 458},
+                new Purchase{Id = 2,Quantity = 650},
+                new Purchase{Id = 3,Quantity = 800},
+                new Purchase{Id = 3,Quantity = 900},
+                new Purchase{Id = 3,Quantity = 900},
+                new Purchase{Id = 4,Quantity = 700},
+                new Purchase{Id = 4,Quantity = 650},
+            };
+            var answer = from product in products
+                         join purchase in purchases on product.Id equals purchase.Id into g
+                         from purchase in g.DefaultIfEmpty()
+                         select new
+                         {
+                             id = product.Id,
+                             name = product.Name,
+                             quantity = purchase != null ? purchase.Quantity : 0
+                         };
+            Console.WriteLine("Đây là danh sách sau khi tham gia:");
+            Console.WriteLine("ID mặt hàng || Tên mặt hàng || Số lượng mua");
+            foreach (var item in answer) Console.WriteLine($"{item.id,6} {item.name,17} {item.quantity,13}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public void Bai27()
+        {
+            List<Product> products = new List<Product>()
+            {
+                new Product{Id = 1,Name = "Bánh Quy" },
+                new Product{Id = 2,Name = "Sô cô la" },
+                new Product{Id = 3,Name = "Bơ" },
+                new Product{Id = 4,Name = "Râu" },
+            };
+            List<Purchase> purchases = new List<Purchase>()
+            {
+                new Purchase{Id = 1,Quantity = 458},
+                new Purchase{Id = 2,Quantity = 650},
+                new Purchase{Id = 3,Quantity = 800},
+                new Purchase{Id = 3,Quantity = 900},
+                new Purchase{Id = 3,Quantity = 900},
+                new Purchase{Id = 4,Quantity = 700},
+                new Purchase{Id = 4,Quantity = 650},
+                new Purchase{Id = 5,Quantity = 650},
+            };
+            var answer = from purchase in purchases
+                         join product in products on purchase.Id equals product.Id into g
+                         from item in g.DefaultIfEmpty()
+                         select new
+                         {
+                             id = purchase.Id,
+                             name = item != null ? item.Name : "Mật ong",
+                             quantity = purchase.Quantity
+                         };
+            var answer1 = from product in products
+                          join purchase in purchases on product.Id equals purchase.Id into g
+                          from purchase in g.DefaultIfEmpty()
+                          select new
+                          {
+                              id = product.Id,
+                              name = product.Name,
+                              quantity = purchase != null ? purchase.Quantity : 0
+                          };
+            var result = answer.Union(answer1);
+
+            Console.WriteLine("Đây là danh sách sau khi tham gia:");
+            Console.WriteLine("ID mặt hàng || Tên mặt hàng || Số lượng mua");
+            foreach (var item in result) Console.WriteLine($"{item.id,6} {item.name,17} {item.quantity,13}");
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public void Bai28()
+        {
+            string[] city = {"ROME","PARIS","LONDON","CALIFORNIA","NEW DELHI",
+            "AMSTERDAM","ABU DHABI","ZURICH","NAIROBI"};
+            var answer = city.OrderBy(a => a.Length).ThenBy(a => a);
+            Console.WriteLine("Đây là danh sách được sắp xếp:");
+            foreach (var ct in answer) Console.WriteLine(ct);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public void Bai29()
+        {
+            string[] city = {"ROME","CALIFORNIA","  LONDON",
+            "AMSTERDAM","ABU DHABI","ZURICH"," NAIROBI","PARIS"," NEW DELHI","   NEW YORK"};
+            var answer = city.GroupBy(a => a.Length % 4);
+            Console.WriteLine("Đây là nhóm các thành phố:");
+            foreach (var gr in answer)
+            {
+                Console.WriteLine(string.Join("; ", gr));
+                Console.WriteLine("-- đây là một nhóm các thành phố --");
+            }
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+        public void Bai30()
+        {
+            List<string> list = new List<string> { "Bánh quy", "Sô cô la", "Bơ", "Râu" };
+            var answer = list.OrderBy(a => a).ToList();
+            Console.WriteLine("Danh sách đã sắp xếp:");
+            foreach (string x in answer) Console.WriteLine(x);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - - - - - - - ");
+        }
+    }
+}
